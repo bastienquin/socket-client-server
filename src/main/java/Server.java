@@ -23,18 +23,18 @@ public class Server {
 
     public static void main (String [] args) throws Exception {
 
-        boolean boucle = true;
+        boolean boucle;
         Reader reader;
-        PrintStream sortie = null;
+        PrintStream sortie;
         Socket soc;
         String line;
 
-        if (args.length != 1) {
+        if (args.length != 2) {
             System.out.println("usage : java serveur port");
             System.exit(0);
         }
 
-        port = Integer.parseInt(args[0]);
+        port = Integer.parseInt(args[1]);
 
         ServerSocket s = new ServerSocket (port);
         System.out.println("La socket serveur est cree");
@@ -52,32 +52,22 @@ public class Server {
                 int choix = Integer.parseInt(keyboard.readLine());
                 System.out.println("Choix : " + choix);
 
-                switch(choix) {
-
-                    case 1:
-
+                switch (choix) {
+                    case 1 -> {
                         line = keyboard.readLine();
                         System.out.println("Vous avez saisi : " + line);
-
                         sortie.println(longueur(line));
-
-                        break;
-                    case 2:
-
+                    }
+                    case 2 -> {
                         line = keyboard.readLine();
                         System.out.println("Vous avez saisi : " + line);
-
                         sortie.println(tri(line));
-
                         int a;
-
-                        break;
-                    case 3:
-                    default:
+                    }
+                    case 3, default -> {
                         boucle = false;
                         soc.close();
-                        break;
-
+                    }
                 }
 
             }
